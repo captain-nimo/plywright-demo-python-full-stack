@@ -36,11 +36,8 @@ jobs:
     - name: Install Playwright browsers
       run: uv run playwright install chromium
 
-    - name: Run API tests
-      run: uv run pytest tests/api/ -v --tb=short --html=report-api.html --self-contained-html
-
-    - name: Run UI tests
-      run: uv run pytest tests/ui/ -v --tb=short --html=report-ui.html --self-contained-html || true
+    - name: Run all tests
+      run: uv run pytest tests/ -v --tb=short --html=report.html --self-contained-html
 
     - name: Upload test reports
       if: always()
