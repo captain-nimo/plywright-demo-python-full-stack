@@ -38,10 +38,14 @@ class Config:
     @classmethod
     def get_browser_launch_args(cls):
         """Get browser launch arguments"""
-        return {
+        args = {
             "headless": cls.HEADLESS,
             "slow_mo": cls.SLOW_MO,
         }
+        # Add flags for headless environments (e.g., GitHub Actions)
+        if cls.HEADLESS:
+            args["args"] = ["--disable-gpu", "--no-sandbox"]
+        return args
 
     @classmethod
     def get_context_options(cls):
